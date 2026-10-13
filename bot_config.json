@@ -1,0 +1,41 @@
+{
+  "botName": "Dalia",
+  "businessName": "Hector Samuel, Yonaiker Marcano & Adrian Hidalgo - Soluciones Tecnológicas & IA",
+  "country": "Venezuela",
+  "currency": "USD",
+  "secondaryCurrency": "VES",
+  "timezone": "America/Caracas",
+  "advisorPhone": "584127163698",
+  "supportEmail": "contacto@tecnologia.com",
+  "directors": [
+    {
+      "name": "Hector Samuel",
+      "phone": "584127163698",
+      "role": "Director & Fundador"
+    },
+    {
+      "name": "Yonaiker Marcano",
+      "phone": "584126058730",
+      "role": "Director & Fundador"
+    },
+    {
+      "name": "Adrian Hidalgo",
+      "phone": "5215621644933",
+      "role": "Director & Socio"
+    }
+  ],
+  "schedule": {
+    "weekdays": "08:00 AM - 06:00 PM",
+    "saturdays": "09:00 AM - 02:00 PM",
+    "sundays": "Cerrado"
+  },
+  "address": "Oficina Central de Operaciones Tecnológicas",
+  "features": {
+    "dualMode": true,
+    "agendaManager": true,
+    "taskManager": true,
+    "projectManager": true,
+    "directorAlerts": true
+  },
+  "banking": {}
+}

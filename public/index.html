@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dalia IA - Centro de Mando Ejecutivo</title>
+    <link rel="stylesheet" href="styles.css?v=4.5">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="theme-light">
+    <!-- PANTALLA DE INICIO DE SESIÓN PREMIUM (SPLIT CARD CON DALIA) -->
+    <div id="login-overlay" class="login-overlay">
+        <div class="login-wrapper">
+            <!-- LADO IZQUIERDO: SHOWCASE DE DALIA -->
+            <div class="login-showcase">
+                <div class="showcase-glow"></div>
+                <div class="showcase-badge-pill">
+                    <span class="pulse-indicator"></span> Asistente Ejecutiva Oficial
+                </div>
+                <div class="showcase-avatar-wrapper">
+                    <img src="dalia.png" alt="Dalia Asistente IA" class="showcase-avatar-img">
+                </div>
+                <div class="showcase-info">
+                    <h2>Dalia IA</h2>
+                    <p class="showcase-role">Gestión Ejecutiva & Comercial</p>
+                    <div class="showcase-directors">
+                        <i class="fa-solid fa-crown"></i>
+                        <span>Para <strong>Hector Samuel</strong>, <strong>Yonaiker Marcano</strong> & <strong>Adrian Hidalgo</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LADO DERECHO: FORMULARIO DE ACCESO -->
+            <div class="login-form-container">
+                <div class="login-header">
+                    <div class="login-brand-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h2>Centro de Mando</h2>
+                    <p>Ingresa tus credenciales para acceder a la gestión</p>
+                </div>
+                <form id="login-form">
+                    <div id="login-error" class="login-error hidden"></div>
+                    <div class="form-group">
+                        <label for="username"><i class="fa-solid fa-user"></i> Usuario Directivo</label>
+                        <div class="input-icon-wrapper">
+                            <input type="text" id="username" required autocomplete="username" placeholder="admin">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password"><i class="fa-solid fa-lock"></i> Contraseña de Acceso</label>
+                        <div class="input-icon-wrapper">
+                            <input type="password" id="password" required autocomplete="current-password" placeholder="••••••••">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block btn-login">
+                        <span>Iniciar Sesión</span> <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <div class="login-footer-security">
+                        <i class="fa-solid fa-lock text-muted"></i>
+                        <span>Conexión cifrada y segura • WhatsApp Business Engine</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENEDOR PRINCIPAL DEL DASHBOARD -->
+    <div class="app-layout">
+        <!-- BARRA LATERAL ELEGANTE (BLANCOS & AZULES) -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-avatar-box">
+                    <img src="dalia.png" alt="Dalia" class="brand-avatar-img">
+                </div>
+                <div class="brand-info">
+                    <h3>Dalia IA</h3>
+                    <span class="brand-badge" id="bot-status-badge"><span class="dot"></span> Conectando...</span>
+                </div>
+            </div>
+
+            <div class="directors-chip">
+                <div class="chip-header">
+                    <i class="fa-solid fa-shield-check"></i>
+                    <span>DIRECTORES A CARGO</span>
+                </div>
+                <div class="chip-names" style="flex-wrap: wrap; gap: 0.25rem;">
+                    <strong>Hector S.</strong>
+                    <span class="sep">•</span>
+                    <strong>Yonaiker M.</strong>
+                    <span class="sep">•</span>
+                    <strong>Adrian H.</strong>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-btn active" data-tab="tab-status">
+                    <i class="fa-solid fa-qrcode"></i> Vinculación & WhatsApp
+                </button>
+                <button class="nav-btn" data-tab="tab-agenda">
+                    <i class="fa-solid fa-calendar-check"></i> Agenda & Citas
+                </button>
+                <button class="nav-btn" data-tab="tab-tasks">
+                    <i class="fa-solid fa-list-check"></i> Tareas & Recordatorios
+                </button>
+                <button class="nav-btn" data-tab="tab-clients">
+                    <i class="fa-solid fa-users"></i> Directorio de Clientes & CRM
+                </button>
+                <button class="nav-btn" data-tab="tab-sofia">
+                    <i class="fa-solid fa-robot"></i> Clientes que Piden Sofía <span class="nav-counter-badge" id="counter-sofia-nav">0</span>
+                </button>
+                <button class="nav-btn" data-tab="tab-finances">
+                    <i class="fa-solid fa-coins"></i> Finanzas & Flujo <span class="nav-counter-badge" id="counter-finances-nav">$0</span>
+                </button>
+                <button class="nav-btn" data-tab="tab-projects">
+                    <i class="fa-solid fa-briefcase"></i> Proyectos & Leads
+                </button>
+                <button class="nav-btn" data-tab="tab-knowledge">
+                    <i class="fa-solid fa-brain"></i> Manual de Dalia
+                </button>
+                <button class="nav-btn" data-tab="tab-config">
+                    <i class="fa-solid fa-sliders"></i> Ajustes & Directores
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="btn-logout-panel" class="btn btn-outline-danger btn-block">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión
+                </button>
+            </div>
+        </aside>
+
+        <!-- ÁREA DE CONTENIDO PRINCIPAL -->
+        <main class="main-content">
+            <!-- CABECERA SUPERIOR EJECUTIVA -->
+            <header class="topbar">
+                <div class="topbar-title">
+                    <h1 id="page-title">Centro de Mando de Dalia</h1>
+                    <p id="page-subtitle">Asistente Ejecutiva y Secretaria de Hector Samuel, Yonaiker Marcano y Adrian Hidalgo</p>
+                </div>
+                <div class="topbar-actions">
+                    <div class="kpi-chips">
+                        <div class="kpi-chip kpi-agenda" title="Citas en Agenda">
+                            <div class="kpi-icon-box"><i class="fa-solid fa-calendar-day"></i></div>
+                            <div>
+                                <span class="kpi-num" id="kpi-agenda">0</span>
+                                <span class="kpi-lbl">Citas</span>
+                            </div>
+                        </div>
+                        <div class="kpi-chip kpi-tasks" title="Tareas Pendientes">
+                            <div class="kpi-icon-box"><i class="fa-solid fa-list-check"></i></div>
+                            <div>
+                                <span class="kpi-num" id="kpi-tasks">0</span>
+                                <span class="kpi-lbl">Tareas</span>
+                            </div>
+                        </div>
+                        <div class="kpi-chip kpi-clients" title="Clientes y Prospectos Registrados">
+                            <div class="kpi-icon-box"><i class="fa-solid fa-users"></i></div>
+                            <div>
+                                <span class="kpi-num" id="kpi-clients">0</span>
+                                <span class="kpi-lbl">Clientes</span>
+                            </div>
+                        </div>
+                        <div class="kpi-chip kpi-projects" title="Proyectos y Leads">
+                            <div class="kpi-icon-box"><i class="fa-solid fa-briefcase"></i></div>
+                            <div>
+                                <span class="kpi-num" id="kpi-projects">0</span>
+                                <span class="kpi-lbl">Proyectos</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-demo-topbar" id="btn-open-demo-modal" title="Lanzar Demostración en Vivo de Sofía">
+                        <i class="fa-solid fa-masks-theater text-primary"></i>
+                        <span id="demo-topbar-status">Demo Sofía: Inactivo</span>
+                    </button>
+                    <div class="status-indicator-pill" id="global-status-pill">
+                        <span class="status-dot-indicator"></span>
+                        <span id="global-status-text">Iniciando...</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- PESTAÑA 1: VINCULACIÓN & WHATSAPP -->
+            <section id="tab-status" class="tab-content active">
+                <div class="grid-2">
+                    <div class="card card-clean text-center" id="card-qr">
+                        <div class="card-header">
+                            <div class="card-icon-badge"><i class="fa-solid fa-qrcode"></i></div>
+                            <h3>Vinculación con WhatsApp</h3>
+                            <p>Escanea el código QR desde la app de WhatsApp de la línea de Dalia</p>
+                        </div>
+                        <div class="qr-container" id="qr-container">
+                            <div id="qr-loading" class="qr-placeholder">
+                                <div class="spinner-pulse"></div>
+                                <p>Generando código QR seguro...</p>
+                            </div>
+                            <img id="qr-image" class="qr-img hidden" alt="Código QR de WhatsApp" src="" />
+                            <div id="qr-connected" class="qr-placeholder hidden">
+                                <div class="connected-icon-box">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                </div>
+                                <h3>¡Dalia está Conectada y en Línea!</h3>
+                                <p>Reconociendo a Hector, Yonaiker y Adrian como directores y atendiendo clientes 24/7.</p>
+                                <p class="connected-phone" id="connected-phone-display">+--</p>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button id="btn-regenerate-qr" class="btn btn-warning">
+                                <i class="fa-solid fa-arrows-rotate"></i> Desconectar y Generar Nuevo QR
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card card-clean">
+                        <div class="card-header">
+                            <div class="card-icon-badge bg-blue"><i class="fa-solid fa-user-shield"></i></div>
+                            <h3>Modo Dual de Dalia</h3>
+                            <p>Directores autorizados con acceso a comandos de secretaria personal</p>
+                        </div>
+                        <div class="directors-list">
+                            <div class="director-card">
+                                <div class="director-avatar"><i class="fa-solid fa-user-check"></i></div>
+                                <div class="director-details">
+                                    <h4>Hector Samuel</h4>
+                                    <p class="font-mono">+58 412-7163698</p>
+                                    <span class="badge badge-blue">Director & Fundador</span>
+                                </div>
+                            </div>
+                            <div class="director-card">
+                                <div class="director-avatar"><i class="fa-solid fa-user-check"></i></div>
+                                <div class="director-details">
+                                    <h4>Yonaiker Marcano</h4>
+                                    <p class="font-mono">+58 412-6058730</p>
+                                    <span class="badge badge-blue">Director & Fundador</span>
+                                </div>
+                            </div>
+                            <div class="director-card">
+                                <div class="director-avatar"><i class="fa-solid fa-user-check"></i></div>
+                                <div class="director-details">
+                                    <h4>Adrian Hidalgo</h4>
+                                    <p class="font-mono">+52 1 56 2164 4933</p>
+                                    <span class="badge badge-blue">Director & Socio</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="quick-commands-box">
+                            <h4><i class="fa-solid fa-wand-magic-sparkles"></i> Comandos que pueden dictarle por WhatsApp:</h4>
+                            <ul>
+                                <li><i class="fa-solid fa-check text-primary"></i> <em>"Dalia, anótame en la agenda reunión con cliente X mañana a las 3pm"</em></li>
+                                <li><i class="fa-solid fa-check text-primary"></i> <em>"Dalia, anótame esta tarea: revisar presupuestos hoy"</em></li>
+                                <li><i class="fa-solid fa-check text-primary"></i> <em>"Dalia, ¿qué tenemos pendiente para hoy?"</em></li>
+                                <li><i class="fa-solid fa-check text-primary"></i> <em>"Dalia, anota este proyecto: Bot WhatsApp Inmobiliaria (Sofía), cliente Carlos"</em></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PESTAÑA 2: AGENDA & CITAS -->
+            <section id="tab-agenda" class="tab-content hidden">
+                <div class="card card-clean">
+                    <div class="card-header flex-between">
+                        <div>
+                            <h3><i class="fa-solid fa-calendar-check text-primary"></i> Agenda Ejecutiva & Reuniones</h3>
+                            <p>Citas de clientes agendadas por Dalia y compromisos dictados por Hector, Yonaiker o Adrian</p>
+                        </div>
+                        <div class="btn-group">
+                            <button id="btn-refresh-agenda" class="btn btn-secondary btn-sm"><i class="fa-solid fa-rotate"></i> Actualizar</button>
+                            <button id="btn-open-modal-agenda" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Nueva Cita</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Título / Asunto</th>
+                                    <th>Cliente / Solicitante</th>
+                                    <th>Notas</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="agenda-tbody">
+                                <tr>
+                                    <td colspan="7" class="text-center text-muted">Cargando agenda...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PESTAÑA 3: TAREAS & RECORDATORIOS -->
+            <section id="tab-tasks" class="tab-content hidden">
+                <div class="card card-clean">
+                    <div class="card-header flex-between">
+                        <div>
+                            <h3><i class="fa-solid fa-list-check text-primary"></i> Cuaderno de Tareas & Pendientes</h3>
+                            <p>Todo lo que Hector, Yonaiker o Adrian le piden a Dalia que les anote y recuerde</p>
+                        </div>
+                        <div class="btn-group">
+                            <button id="btn-refresh-tasks" class="btn btn-secondary btn-sm"><i class="fa-solid fa-rotate"></i> Actualizar</button>
+                            <button id="btn-open-modal-task" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Nueva Tarea</button>
+                        </div>
+                    </div>
+
+                    <div class="tasks-filters">
+                        <button class="filter-btn active" data-filter="all"><i class="fa-solid fa-list-check"></i> Todas (<span id="task-cnt-all">0</span>)</button>
+                        <button class="filter-btn" data-filter="Hector Samuel"><i class="fa-solid fa-crown text-warning"></i> De Hector (<span id="task-cnt-hector">0</span>)</button>
+                        <button class="filter-btn" data-filter="Yonaiker Marcano"><i class="fa-solid fa-user-gear text-info"></i> De Yonaiker (<span id="task-cnt-yonaiker">0</span>)</button>
+                        <button class="filter-btn" data-filter="Adrian Hidalgo"><i class="fa-solid fa-user-shield text-primary"></i> De Adrian (<span id="task-cnt-adrian">0</span>)</button>
+                        <button class="filter-btn" data-filter="Equipo"><i class="fa-solid fa-users text-purple"></i> Equipo (<span id="task-cnt-equipo">0</span>)</button>
+                        <button class="filter-btn" data-filter="pending"><i class="fa-solid fa-clock text-warning"></i> Pendientes (<span id="task-cnt-pending">0</span>)</button>
+                    </div>
+
+                    <div id="tasks-list-container" class="tasks-list">
+                        <p class="text-muted p-4 text-center">Cargando tareas...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PESTAÑA: DIRECTORIO DE CLIENTES & CRM -->
+            <section id="tab-clients" class="tab-content hidden">
+                <div class="card card-clean">
+                    <div class="card-header flex-between">
+                        <div>
+                            <h3><i class="fa-solid fa-users text-primary"></i> Directorio de Clientes & CRM Visual</h3>
+                            <p>Gestión comercial, pipeline visual de ventas, auto-extracción inteligente y fichas 360°</p>
+                        </div>
+                        <div class="btn-group">
+                            <input type="text" id="filter-clients-input" class="search-input-sm" placeholder="Buscar por nombre, WhatsApp, negocio o notas...">
+                            <select id="filter-briefing-select" class="select-sm">
+                                <option value="all">Todos los Estados del Pipeline</option>
+                                <option value="🟡 Lead Nuevo">🟡 Lead Nuevo</option>
+                                <option value="🔵 En Conversación">🔵 En Conversación</option>
+                                <option value="🔥 Interesado Caliente">🔥 Interesado Caliente</option>
+                                <option value="📅 Cita Agendada">📅 Cita Agendada</option>
+                                <option value="🟢 Cliente Ganado">🟢 Cliente Ganado</option>
+                                <option value="⚪ Frío / Sin Respuesta">⚪ Frío / Sin Respuesta</option>
+                                <option value="paused">🛑 Bot Silenciado (Control Humano)</option>
+                                <option value="briefing_done">🏆 Briefing Sofía Completado</option>
+                            </select>
+                            <button id="btn-refresh-clients" class="btn btn-secondary btn-sm"><i class="fa-solid fa-rotate"></i> Actualizar</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre / Contacto</th>
+                                    <th>Empresa / Rubro</th>
+                                    <th>Etiqueta de Interés</th>
+                                    <th>Estado / Pipeline</th>
+                                    <th>Última Actividad</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="clients-tbody">
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted">Cargando base de datos de clientes...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PESTAÑA: CLIENTES QUE PIDEN SOFÍA (RECAUDACIÓN Y ONBOARDING) -->
+            <section id="tab-sofia" class="tab-content hidden">
+                <div class="card card-clean">
+                    <div class="card-header flex-between">
+                        <div>
+                            <h3><i class="fa-solid fa-robot text-primary"></i> Clientes que Piden Sofía</h3>
+                            <p>Módulo exclusivo para prospectos que contratan nuestro bot comercial. Seguimiento estricto del cuestionario (15 preguntas sin saltarse ninguna) y exportación de configuración del bot.</p>
+                        </div>
+                        <div class="btn-group">
+                            <input type="text" id="filter-sofia-input" class="search-input-sm" placeholder="Buscar por cliente, empresa, rubro...">
+                            <select id="filter-sofia-status" class="select-sm">
+                                <option value="all">Todos los Estados</option>
+                                <option value="in_progress">⏳ Cuestionario en Progreso</option>
+                                <option value="completed">🏆 Cuestionario 100% Completado</option>
+                            </select>
+                            <button id="btn-refresh-sofia" class="btn btn-secondary btn-sm"><i class="fa-solid fa-rotate"></i> Actualizar</button>
+                        </div>
+                    </div>
+
+                    <!-- METRICAS SUPERIORES DE SOFÍA -->
+                    <div class="sofia-kpis-grid">
+                        <div class="sofia-kpi-card kpi-sofia-total">
+                            <div class="kpi-icon"><i class="fa-solid fa-users-gear"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-title">Total Solicitudes de Sofía</span>
+                                <h2 id="kpi-sofia-total-count">0</h2>
+                                <span class="kpi-sub">Prospectos que pidieron el bot</span>
+                            </div>
+                        </div>
+                        <div class="sofia-kpi-card kpi-sofia-progress">
+                            <div class="kpi-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-title">En Cuestionario Activo</span>
+                                <h2 id="kpi-sofia-progress-count">0</h2>
+                                <span class="kpi-sub">Dalia recaudando paso a paso</span>
+                            </div>
+                        </div>
+                        <div class="sofia-kpi-card kpi-sofia-done">
+                            <div class="kpi-icon"><i class="fa-solid fa-trophy"></i></div>
+                            <div class="kpi-details">
+                                <span class="kpi-title">100% Listos para Despliegue</span>
+                                <h2 id="kpi-sofia-done-count">0</h2>
+                                <span class="kpi-sub">Las 15 especificaciones listas</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CONTENEDOR DE TARJETAS DE CLIENTES DE SOFÍA -->
+                    <div id="sofia-clients-container" class="sofia-clients-list">
+                        <p class="text-muted p-4 text-center">Cargando expedientes de Sofía...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PESTAÑA 4: PROYECTOS & LEADS -->
+            <section id="tab-projects" class="tab-content hidden">
+                <div class="card card-clean">
+                    <div class="card-header flex-between">
+                        <div>
+                            <h3><i class="fa-solid fa-briefcase text-primary"></i> Proyectos & Pipeline de Prospectos</h3>
+                            <p>Seguimiento a solicitudes de bots (Sofía), software a medida y proyectos en desarrollo</p>
+                        </div>
+                        <div class="btn-group">
+                            <button id="btn-refresh-projects" class="btn btn-secondary btn-sm"><i class="fa-solid fa-rotate"></i> Actualizar</button>
+                            <button id="btn-open-modal-project" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Nuevo Proyecto</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Proyecto</th>
+                                    <th>Cliente / Contacto</th>
+                                    <th>Descripción / Requerimiento</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="projects-tbody">
+                                <tr>
+                                    <td colspan="6" class="text-center text-muted">Cargando proyectos...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PESTAÑA 5: MANUAL DE DALIA -->
+            <section id="tab-knowledge" class="tab-content hidden">
+                <div class="card card-clean">
+                    <div class="card-header flex-between">
+                        <div>
+                            <h3><i class="fa-solid fa-brain text-primary"></i> Manual de Conocimiento e Instrucciones de Dalia</h3>
+                            <p>Reglas de Dalia, roles directivos, producto comercial (Sofía) y protocolos</p>
+                        </div>
+                        <button id="btn-save-knowledge" class="btn btn-primary">
+                            <i class="fa-solid fa-floppy-disk"></i> Guardar Cambios
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="knowledge-editor" rows="20" class="code-editor" placeholder="Cargando manual..."></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PESTAÑA 6: AJUSTES & DIRECTORES -->
+            <section id="tab-config" class="tab-content hidden">
+                <div class="card card-clean">
+                    <div class="card-header flex-between">
+                        <div>
+                            <h3><i class="fa-solid fa-sliders text-primary"></i> Configuración de la Empresa & Jefes</h3>
+                            <p>Ajustes de nombres, números autorizados y parámetros operativos</p>
+                        </div>
+                        <button id="btn-save-config" class="btn btn-primary">
+                            <i class="fa-solid fa-floppy-disk"></i> Guardar Ajustes
+                        </button>
+                    </div>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Nombre de la Empresa / Equipo:</label>
+                            <input type="text" id="cfg-business-name" placeholder="Hector Samuel, Yonaiker Marcano & Adrian Hidalgo">
+                        </div>
+                        <div class="form-group">
+                            <label>Nombre del Asistente:</label>
+                            <input type="text" id="cfg-bot-name" placeholder="Dalia">
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono Hector Samuel:</label>
+                            <input type="text" id="cfg-director-hector" value="584127163698" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono Yonaiker Marcano:</label>
+                            <input type="text" id="cfg-director-yonaiker" value="584126058730" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono Adrian Hidalgo:</label>
+                            <input type="text" id="cfg-director-adrian" value="+52 1 56 2164 4933" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Zona Horaria:</label>
+                            <input type="text" id="cfg-timezone" placeholder="America/Caracas">
+                        </div>
+                        <div class="form-group">
+                            <label>Moneda Principal:</label>
+                            <input type="text" id="cfg-currency" placeholder="USD">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PESTAÑA: FINANZAS & FLUJO DE CAJA (CORPORATE FINTECH) -->
+            <section id="tab-finances" class="tab-content hidden">
+                <div class="card card-clean fin-main-card">
+                    <div class="card-header flex-between fin-header">
+                        <div class="fin-header-left">
+                            <div class="fin-header-icon-box">
+                                <i class="fa-solid fa-vault"></i>
+                            </div>
+                            <div>
+                                <h3 class="fin-title">Finanzas & Flujo de Caja Corporativo</h3>
+                                <p class="fin-subtitle">Consolidado en tiempo real de cobros por implementaciones de Sofía, servicios y egresos del equipo directivo</p>
+                            </div>
+                        </div>
+                        <div class="fin-header-actions">
+                            <button id="btn-refresh-finances" class="btn btn-secondary btn-sm" title="Refrescar movimientos">
+                                <i class="fa-solid fa-rotate"></i> Actualizar
+                            </button>
+                            <button id="btn-open-modal-finance" class="btn btn-primary btn-sm btn-fin-add">
+                                <i class="fa-solid fa-plus-circle"></i> Registrar Movimiento
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 3 EXECUTIVE FINTECH KPI CARDS -->
+                    <div class="fin-kpi-grid">
+                        <!-- KPI 1: INGRESOS -->
+                        <div class="fin-kpi-card fin-kpi-income">
+                            <div class="fin-kpi-top">
+                                <div class="fin-kpi-icon fin-icon-income">
+                                    <i class="fa-solid fa-arrow-trend-up"></i>
+                                </div>
+                                <span class="fin-badge-pill fin-pill-income">
+                                    <i class="fa-solid fa-circle-check"></i> Cobros & Anticipos
+                                </span>
+                            </div>
+                            <div class="fin-kpi-body">
+                                <span class="fin-kpi-label">TOTAL INGRESOS (USD)</span>
+                                <h2 class="fin-kpi-value text-emerald" id="finance-kpi-income">$0.00</h2>
+                                <span class="fin-kpi-subtext" id="finance-kpi-income-sub">Ingresos confirmados</span>
+                            </div>
+                        </div>
+
+                        <!-- KPI 2: GASTOS -->
+                        <div class="fin-kpi-card fin-kpi-expense">
+                            <div class="fin-kpi-top">
+                                <div class="fin-kpi-icon fin-icon-expense">
+                                    <i class="fa-solid fa-arrow-trend-down"></i>
+                                </div>
+                                <span class="fin-badge-pill fin-pill-expense">
+                                    <i class="fa-solid fa-server"></i> Operativo & Cloud
+                                </span>
+                            </div>
+                            <div class="fin-kpi-body">
+                                <span class="fin-kpi-label">TOTAL GASTOS (USD)</span>
+                                <h2 class="fin-kpi-value text-rose" id="finance-kpi-expense">$0.00</h2>
+                                <span class="fin-kpi-subtext" id="finance-kpi-expense-sub">Servidores y licencias</span>
+                            </div>
+                        </div>
+
+                        <!-- KPI 3: BALANCE NETO -->
+                        <div class="fin-kpi-card fin-kpi-balance">
+                            <div class="fin-kpi-top">
+                                <div class="fin-kpi-icon fin-icon-balance">
+                                    <i class="fa-solid fa-wallet"></i>
+                                </div>
+                                <span class="fin-badge-pill fin-pill-balance">
+                                    <i class="fa-solid fa-scale-balanced"></i> Margen Disponible
+                                </span>
+                            </div>
+                            <div class="fin-kpi-body">
+                                <span class="fin-kpi-label">BALANCE NETO / MARGEN (USD)</span>
+                                <h2 class="fin-kpi-value" id="finance-kpi-balance">$0.00</h2>
+                                <span class="fin-kpi-subtext" id="finance-kpi-balance-sub">Caja disponible en oficina</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TOOLBAR DE FILTROS SEGMENTADOS -->
+                    <div class="fin-toolbar">
+                        <div class="fin-segmented-filters">
+                            <button class="fin-seg-btn active" data-finance-filter="all">
+                                <i class="fa-solid fa-layer-group"></i> Todos (<span id="fin-cnt-all">0</span>)
+                            </button>
+                            <button class="fin-seg-btn" data-finance-filter="ingreso">
+                                <i class="fa-solid fa-arrow-trend-up text-emerald"></i> Ingresos (<span id="fin-cnt-income">0</span>)
+                            </button>
+                            <button class="fin-seg-btn" data-finance-filter="gasto">
+                                <i class="fa-solid fa-arrow-trend-down text-rose"></i> Gastos (<span id="fin-cnt-expense">0</span>)
+                            </button>
+                        </div>
+                        <div class="fin-whatsapp-banner">
+                            <i class="fa-brands fa-whatsapp text-emerald"></i>
+                            <span>Directores pueden registrar cobros diciendo: <em>"Anota ingreso de $150 anticipo cliente..."</em></span>
+                        </div>
+                    </div>
+
+                    <!-- TABLA EJECUTIVA DE MOVIMIENTOS -->
+                    <div class="table-responsive fin-table-wrapper">
+                        <table class="fin-table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Tipo</th>
+                                    <th>Concepto / Detalle</th>
+                                    <th>Categoría</th>
+                                    <th>Registrado Por</th>
+                                    <th class="text-right">Monto</th>
+                                    <th class="text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="finances-tbody">
+                                <tr><td colspan="7" class="text-center text-muted py-4">Cargando movimientos financieros...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- MODAL: NUEVA CITA EN AGENDA -->
+    <div id="modal-agenda" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-calendar-plus text-primary"></i> Agendar Nueva Cita</h3>
+                <button class="btn-close-modal" data-modal="modal-agenda">&times;</button>
+            </div>
+            <form id="form-new-agenda">
+                <div class="form-group">
+                    <label>Título o Motivo de la Cita:</label>
+                    <input type="text" id="agenda-input-title" required placeholder="Ej: Reunión con cliente Carlos">
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Fecha:</label>
+                        <input type="date" id="agenda-input-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Hora:</label>
+                        <input type="text" id="agenda-input-time" placeholder="Ej: 03:00 PM">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Cliente o Participantes:</label>
+                    <input type="text" id="agenda-input-client" placeholder="Ej: Carlos Silva / Hector Samuel">
+                </div>
+                <div class="form-group">
+                    <label>Notas adicionales:</label>
+                    <textarea id="agenda-input-notes" rows="2" placeholder="Tema a tratar, enlace de Meet, etc."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-save"></i> Guardar en Agenda</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: EDITAR CITA DE AGENDA -->
+    <div id="modal-edit-agenda" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-pen-to-square text-primary"></i> Modificar Cita en Agenda</h3>
+                <button class="btn-close-modal" data-modal="modal-edit-agenda">&times;</button>
+            </div>
+            <form id="form-edit-agenda">
+                <input type="hidden" id="edit-agenda-id">
+                <div class="form-group">
+                    <label>Título o Motivo de la Cita:</label>
+                    <input type="text" id="edit-agenda-title" required placeholder="Ej: Reunión con cliente Carlos">
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Fecha:</label>
+                        <input type="date" id="edit-agenda-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Hora:</label>
+                        <input type="text" id="edit-agenda-time" placeholder="Ej: 03:00 PM">
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Cliente o Participantes:</label>
+                        <input type="text" id="edit-agenda-client" placeholder="Ej: Carlos Silva / Hector Samuel">
+                    </div>
+                    <div class="form-group">
+                        <label>Asignado / Creado por:</label>
+                        <select id="edit-agenda-creator">
+                            <option value="Hector Samuel">👑 Hector Samuel</option>
+                            <option value="Yonaiker Marcano">⚙️ Yonaiker Marcano</option>
+                            <option value="Adrian Hidalgo">🛡️ Adrian Hidalgo</option>
+                            <option value="Equipo">👥 Equipo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Notas adicionales:</label>
+                    <textarea id="edit-agenda-notes" rows="2" placeholder="Tema a tratar, enlace de Meet, etc."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-check"></i> Actualizar Cita</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: NUEVA TAREA -->
+    <div id="modal-task" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-plus-circle text-primary"></i> Agregar Tarea / Recordatorio</h3>
+                <button class="btn-close-modal" data-modal="modal-task">&times;</button>
+            </div>
+            <form id="form-new-task">
+                <div class="form-group">
+                    <label>Descripción de la Tarea:</label>
+                    <input type="text" id="task-input-desc" required placeholder="Ej: Llamar al cliente para confirmar propuesta">
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Responsable:</label>
+                        <select id="task-input-assigned">
+                            <option value="Hector Samuel">👑 Hector Samuel (Jefe)</option>
+                            <option value="Yonaiker Marcano">⚙️ Yonaiker Marcano (Jefe)</option>
+                            <option value="Adrian Hidalgo">🛡️ Adrian Hidalgo (Jefe)</option>
+                            <option value="Equipo">👥 Todos / Equipo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha Límite / Momento:</label>
+                        <input type="text" id="task-input-due" placeholder="Ej: Hoy a las 5pm, Viernes, etc.">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-save"></i> Guardar Tarea</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: EDITAR TAREA / RECORDATORIO -->
+    <div id="modal-edit-task" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-pen-to-square text-primary"></i> Modificar Tarea / Recordatorio</h3>
+                <button class="btn-close-modal" data-modal="modal-edit-task">&times;</button>
+            </div>
+            <form id="form-edit-task">
+                <input type="hidden" id="edit-task-id">
+                <div class="form-group">
+                    <label>Descripción de la Tarea:</label>
+                    <input type="text" id="edit-task-desc" required placeholder="Descripción del recordatorio">
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Responsable:</label>
+                        <select id="edit-task-assigned">
+                            <option value="Hector Samuel">👑 Hector Samuel (Jefe)</option>
+                            <option value="Yonaiker Marcano">⚙️ Yonaiker Marcano (Jefe)</option>
+                            <option value="Adrian Hidalgo">🛡️ Adrian Hidalgo (Jefe)</option>
+                            <option value="Equipo">👥 Todos / Equipo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha Límite / Momento:</label>
+                        <input type="text" id="edit-task-due" placeholder="Ej: Hoy a las 5pm, Mañana, etc.">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-check"></i> Actualizar Recordatorio</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: NUEVO PROYECTO -->
+    <div id="modal-project" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-folder-plus text-primary"></i> Registrar Proyecto o Lead</h3>
+                <button class="btn-close-modal" data-modal="modal-project">&times;</button>
+            </div>
+            <form id="form-new-project">
+                <div class="form-group">
+                    <label>Nombre del Proyecto:</label>
+                    <input type="text" id="project-input-name" required placeholder="Ej: Bot WhatsApp Inmobiliaria">
+                </div>
+                <div class="form-group">
+                    <label>Cliente / Contacto:</label>
+                    <input type="text" id="project-input-client" placeholder="Ej: Pedro Morales - 0414-1234567">
+                </div>
+                <div class="form-group">
+                    <label>Descripción / Alcance:</label>
+                    <textarea id="project-input-desc" rows="3" placeholder="Requerimientos solicitados..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Estado Inicial:</label>
+                    <select id="project-input-status">
+                        <option value="Lead Nuevo">Lead Nuevo</option>
+                        <option value="En Evaluación">En Evaluación</option>
+                        <option value="Cotizado">Cotizado</option>
+                        <option value="En Desarrollo">En Desarrollo</option>
+                        <option value="Finalizado">Finalizado</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-save"></i> Guardar Proyecto</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: FICHA 360° CLIENTE & BRIEFING SOFÍA (EXECUTIVE CRM 360) -->
+    <div id="modal-client" class="modal-overlay hidden">
+        <div class="modal-card client-360-modal">
+            <!-- CABECERA FIJA SUPERIOR -->
+            <div class="client-modal-header">
+                <div class="client-header-left">
+                    <div class="client-avatar-badge">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+                    <div class="client-header-info">
+                        <div class="client-title-row">
+                            <h3 id="mc-client-name" class="client-name">Perfil del Cliente</h3>
+                            <span id="mc-pipeline-badge" class="badge badge-lead-nuevo">🟡 Lead Nuevo</span>
+                            <span id="mc-pause-badge" class="badge badge-success"><i class="fa-solid fa-robot"></i> Dalia Activa</span>
+                        </div>
+                        <p id="mc-client-subtitle" class="client-meta-subtitle">+58... • Última interacción: ...</p>
+                    </div>
+                </div>
+                
+                <div class="client-header-actions">
+                    <a id="mc-link-whatsapp" href="#" target="_blank" class="btn btn-sm btn-whatsapp-direct" title="Abrir chat en WhatsApp">
+                        <i class="fa-brands fa-whatsapp"></i> Chat WhatsApp
+                    </a>
+                    <button id="btn-toggle-pause-client" class="btn btn-sm btn-outline-warning" title="Silenciar o reactivar a Dalia">
+                        <i class="fa-solid fa-hand"></i> Silenciar
+                    </button>
+                    <button id="btn-send-followup-now" class="btn btn-sm btn-secondary" title="Enviar recordatorio cordial de ventas">
+                        <i class="fa-solid fa-paper-plane"></i> Seguimiento
+                    </button>
+                    <button class="client-modal-close btn-close-modal" data-modal="modal-client" title="Cerrar Ficha">&times;</button>
+                </div>
+            </div>
+            
+            <!-- TOOLBAR DE NAVEGACIÓN Y SELECTOR DE PIPELINE -->
+            <div class="client-modal-toolbar">
+                <div class="client-modal-tabs">
+                    <button class="client-tab-btn active" data-client-tab="tab-client-chat">
+                        <i class="fa-solid fa-comments"></i> Transcripción & Chat (<span id="mc-chat-count">0</span>)
+                    </button>
+                    <button class="client-tab-btn" data-client-tab="tab-client-briefing">
+                        <i class="fa-solid fa-clipboard-question"></i> Briefing Sofía (5 Bloques)
+                    </button>
+                    <button class="client-tab-btn" data-client-tab="tab-client-notes">
+                        <i class="fa-solid fa-note-sticky"></i> Notas Privadas
+                    </button>
+                </div>
+
+                <div class="client-pipeline-ctrl">
+                    <label for="mc-pipeline-select"><i class="fa-solid fa-filter text-primary"></i> Etapa Comercial:</label>
+                    <select id="mc-pipeline-select" class="stage-select-sm" title="Cambiar etapa del pipeline">
+                        <option value="🟡 Lead Nuevo">🟡 Lead Nuevo</option>
+                        <option value="🔵 En Conversación">🔵 En Conversación</option>
+                        <option value="🔥 Interesado Caliente">🔥 Interesado Caliente</option>
+                        <option value="📅 Cita Agendada">📅 Cita Agendada</option>
+                        <option value="🟢 Cliente Ganado">🟢 Cliente Ganado</option>
+                        <option value="⚪ Frío / Sin Respuesta">⚪ Frío / Sin Respuesta</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- CUERPO PRINCIPAL DEL MODAL CON PESTAÑAS -->
+            <div class="client-modal-body">
+                <!-- SUBTAB 1: CHAT & INTELIGENCIA IA (SPLIT VIEW COMPLETO) -->
+                <div id="tab-client-chat" class="client-subtab active">
+                    <div class="client-split-layout">
+                        <!-- COLUMNA IZQUIERDA: INTELIGENCIA IA & CRM -->
+                        <div class="client-intel-panel">
+                            <!-- RESUMEN EJECUTIVO POR IA -->
+                            <div class="ai-summary-card">
+                                <div class="ai-summary-header">
+                                    <i class="fa-solid fa-wand-magic-sparkles text-primary"></i>
+                                    <span>Resumen Ejecutivo (Dalia IA):</span>
+                                </div>
+                                <p id="mc-ai-summary" class="ai-summary-text">Cargando resumen del prospecto...</p>
+                            </div>
+
+                            <!-- DATOS COMERCIALES AUTO-EXTRAÍDOS -->
+                            <div class="extracted-data-card">
+                                <div class="extracted-data-title">
+                                    <i class="fa-solid fa-id-card-clip text-primary"></i> Datos Extraídos por Dalia:
+                                </div>
+                                <div class="extracted-grid">
+                                    <div class="extracted-item">
+                                        <label>Nombre Real:</label>
+                                        <span id="mc-val-name">-</span>
+                                    </div>
+                                    <div class="extracted-item">
+                                        <label>Empresa / Negocio:</label>
+                                        <span id="mc-val-company">-</span>
+                                    </div>
+                                    <div class="extracted-item">
+                                        <label>Sector / Rubro:</label>
+                                        <span id="mc-val-rubro">-</span>
+                                    </div>
+                                    <div class="extracted-item">
+                                        <label>Urgencia de Compra:</label>
+                                        <span id="mc-val-urgency">-</span>
+                                    </div>
+                                    <div class="extracted-item">
+                                        <label>Presupuesto / Equipo:</label>
+                                        <span id="mc-val-budget">-</span>
+                                    </div>
+                                    <div class="extracted-item">
+                                        <label>Interés Comercial:</label>
+                                        <span id="mc-val-interest">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- COLUMNA DERECHA: CONVERSACIÓN EN VIVO WHATSAPP -->
+                        <div class="client-chat-panel">
+                            <div class="chat-panel-header">
+                                <span><i class="fa-brands fa-whatsapp text-success"></i> Transcripción de WhatsApp</span>
+                                <span class="text-muted font-sm font-mono">Actualización en tiempo real</span>
+                            </div>
+                            <div class="chat-stream-box" id="mc-chat-stream">
+                                <p class="text-muted text-center p-4">No hay mensajes registrados aún.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUBTAB 2: BRIEFING SOFÍA (LOS 5 BLOQUES REQUERIDOS) -->
+                <div id="tab-client-briefing" class="client-subtab hidden">
+                    <div class="briefing-container">
+                        <div class="briefing-notice">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <span>Este cuestionario es realizado por <strong>Dalia</strong> pregunta a pregunta cuando el cliente solicita un bot Sofía. Se actualiza automáticamente.</span>
+                        </div>
+
+                        <!-- BLOQUE 1 -->
+                        <div class="briefing-block-card">
+                            <div class="briefing-block-header">
+                                <span class="block-number">1</span>
+                                <h4>Información Básica del Negocio</h4>
+                            </div>
+                            <div class="briefing-block-grid">
+                                <div class="briefing-field">
+                                    <label>Nombre comercial y eslogan:</label>
+                                    <p id="bf-nombre-eslogan" class="briefing-val">-</p>
+                                </div>
+                                <div class="briefing-field">
+                                    <label>Sector o industria:</label>
+                                    <p id="bf-sector" class="briefing-val">-</p>
+                                </div>
+                                <div class="briefing-field">
+                                    <label>Sitio web y redes sociales:</label>
+                                    <p id="bf-web-redes" class="briefing-val">-</p>
+                                </div>
+                                <div class="briefing-field full-width">
+                                    <label>Descripción y propuesta de valor (2-3 líneas):</label>
+                                    <p id="bf-descripcion" class="briefing-val">-</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- BLOQUE 2 -->
+                        <div class="briefing-block-card">
+                            <div class="briefing-block-header">
+                                <span class="block-number">2</span>
+                                <h4>Propósito y Objetivos del Bot</h4>
+                            </div>
+                            <div class="briefing-block-grid">
+                                <div class="briefing-field">
+                                    <label>Función principal del bot:</label>
+                                    <p id="bf-funcion-principal" class="briefing-val">-</p>
+                                </div>
+                                <div class="briefing-field">
+                                    <label>Acción esperada al final de la charla:</label>
+                                    <p id="bf-accion-final" class="briefing-val">-</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- BLOQUE 3 -->
+                        <div class="briefing-block-card">
+                            <div class="briefing-block-header">
+                                <span class="block-number">3</span>
+                                <h4>Tono de Voz y Personalidad</h4>
+                            </div>
+                            <div class="briefing-block-grid">
+                                <div class="briefing-field">
+                                    <label>Estilo de comunicación:</label>
+                                    <p id="bf-estilo" class="briefing-val">-</p>
+                                </div>
+                                <div class="briefing-field">
+                                    <label>Uso de emojis:</label>
+                                    <p id="bf-emojis" class="briefing-val">-</p>
+                                </div>
+                                <div class="briefing-field">
+                                    <label>Trato al cliente (tú / usted):</label>
+                                    <p id="bf-trato" class="briefing-val">-</p>
+                                </div>
+                                <div class="briefing-field">
+                                    <label>Nombre y avatar asignado:</label>
+                                    <p id="bf-nombre-bot" class="briefing-val">-</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- BLOQUE 4 -->
+                        <div class="briefing-block-card">
+                            <div class="briefing-block-header">
+                                <span class="block-number">4</span>
+                                <h4>Base de Conocimiento y Oferta (El Cerebro)</h4>
+                            </div>
+                            <div class="briefing-block-grid">
+                                <div class="briefing-field full-width">
+                                    <label>Productos / Servicios principales y precios:</label>
+                                    <p id="bf-productos-precios" class="briefing-val">-</p>
+                                </div>
+                                <div class="briefing-field full-width">
+                                    <label>Preguntas Frecuentes (FAQs recurrentes):</label>
+                                    <p id="bf-faqs" class="briefing-val">-</p>
+                                </div>
+                                <div class="briefing-field full-width">
+                                    <label>Políticas clave (envíos, devoluciones, garantías):</label>
+                                    <p id="bf-politicas" class="briefing-val">-</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- BLOQUE 5 -->
+                        <div class="briefing-block-card">
+                            <div class="briefing-block-header">
+                                <span class="block-number">5</span>
+                                <h4>Reglas de Negocio y Límites (Guardrails)</h4>
+                            </div>
+                            <div class="briefing-block-grid">
+                                <div class="briefing-field full-width">
+                                    <label>Temas que NUNCA debe tocar o prometer:</label>
+                                    <p id="bf-prohibidos" class="briefing-val">-</p>
+                                </div>
+                                <div class="briefing-field full-width">
+                                    <label>Criterio exacto de derivación a asesor humano:</label>
+                                    <p id="bf-derivacion" class="briefing-val">-</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUBTAB 3: NOTAS PRIVADAS DE LOS JEFES -->
+                <div id="tab-client-notes" class="client-subtab hidden">
+                    <div class="notes-container">
+                        <label>Notas de seguimiento de Hector, Yonaiker y Adrian:</label>
+                        <textarea id="mc-notes-textarea" rows="6" placeholder="Escribe aquí observaciones sobre este cliente, acuerdos, presupuesto acordado, etc."></textarea>
+                        <div class="mt-2 text-right">
+                            <button id="btn-save-client-notes" class="btn btn-primary btn-sm">
+                                <i class="fa-solid fa-save"></i> Guardar Notas
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: REGISTRAR MOVIMIENTO FINANCIERO (TOP-LEVEL) -->
+    <div id="modal-finance" class="modal-overlay hidden">
+        <div class="modal-card fin-modal-card">
+            <div class="modal-header">
+                <div class="fin-modal-title-box">
+                    <div class="fin-modal-badge-icon">
+                        <i class="fa-solid fa-money-bill-transfer"></i>
+                    </div>
+                    <div>
+                        <h3>Registrar Movimiento de Caja</h3>
+                        <p class="text-muted font-sm" style="margin: 2px 0 0 0;">Ingreso de clientes o egreso operativo de la empresa</p>
+                    </div>
+                </div>
+                <button class="btn-close-modal" data-modal="modal-finance">&times;</button>
+            </div>
+            <form id="form-new-finance" style="padding: 20px;">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-arrows-up-down text-primary"></i> Tipo de Movimiento:</label>
+                        <select id="fin-input-type" required>
+                            <option value="ingreso">🟢 Ingreso / Cobro de Cliente</option>
+                            <option value="gasto">🔴 Gasto / Egreso Operativo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-dollar-sign text-success"></i> Monto & Moneda:</label>
+                        <div class="input-money-group">
+                            <input type="number" id="fin-input-amount" step="0.01" min="0.01" required placeholder="Ej: 150.00">
+                            <select id="fin-input-currency">
+                                <option value="USD">USD ($)</option>
+                                <option value="VES">VES (Bs)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><i class="fa-solid fa-file-signature text-primary"></i> Concepto / Detalle:</label>
+                    <input type="text" id="fin-input-concept" required placeholder="Ej: Anticipo 50% por bot Sofía cliente repuestos">
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-tags text-primary"></i> Categoría:</label>
+                        <select id="fin-input-category">
+                            <option value="Ventas Bot Sofía">Ventas Bot Sofía</option>
+                            <option value="Desarrollo Software">Desarrollo Software</option>
+                            <option value="Mantenimiento IA">Mantenimiento IA</option>
+                            <option value="Servidores / Hosting">Servidores / Hosting</option>
+                            <option value="Publicidad">Publicidad</option>
+                            <option value="Operativo / Oficina">Operativo / Oficina</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-user-tie text-primary"></i> Registrado Por:</label>
+                        <select id="fin-input-recorded-by">
+                            <option value="Hector Samuel">👑 Hector Samuel</option>
+                            <option value="Yonaiker Marcano">⚙️ Yonaiker Marcano</option>
+                            <option value="Adrian Hidalgo">🛡️ Adrian Hidalgo</option>
+                            <option value="Equipo">👥 Equipo Directivo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><i class="fa-regular fa-calendar text-primary"></i> Fecha:</label>
+                    <input type="date" id="fin-input-date">
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                    <button type="button" class="btn btn-secondary btn-close-modal" data-modal="modal-finance" style="flex: 1;">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" style="flex: 2;"><i class="fa-solid fa-check"></i> Guardar Movimiento</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- MODAL: DEMOSTRACIÓN EN VIVO DE SOFÍA -->
+    <div id="modal-demo-sofia" class="modal-overlay hidden">
+        <div class="modal-card modal-lg">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-masks-theater text-primary"></i> Modo Demostración en Vivo de Sofía</h3>
+                <button class="btn-close-modal" data-modal="modal-demo-sofia">&times;</button>
+            </div>
+            <div class="modal-body" style="padding: 24px;">
+                <div class="demo-modal-status-box" id="demo-modal-status-box">
+                    <div class="demo-status-indicator">
+                        <span class="status-dot-indicator" id="demo-status-dot"></span>
+                        <span id="demo-status-title" style="font-weight: 700; font-size: 1.05rem;">Modo Demo: Inactivo</span>
+                    </div>
+                    <p id="demo-status-desc" class="text-muted" style="margin: 6px 0 0 0; font-size: 0.9rem;">
+                        Transforma a Dalia temporalmente en <strong>Sofía</strong> adaptada al negocio de tu cliente para hacerle una demostración en vivo de ventas directamente en WhatsApp.
+                    </p>
+                </div>
+
+                <div class="form-group" style="margin-top: 20px;">
+                    <label style="font-weight: 600;"><i class="fa-solid fa-wand-magic-sparkles text-primary"></i> Rubros Rápidos (Haz 1 Clic para seleccionar):</label>
+                    <div class="demo-preset-grid">
+                        <button type="button" class="btn-demo-preset" data-niche="Farmacia y Venta de Medicamentos con Delivery"><i class="fa-solid fa-pills"></i> Farmacia</button>
+                        <button type="button" class="btn-demo-preset" data-niche="Panadería y Pastelería Artesanal con Tortas y Desayunos"><i class="fa-solid fa-bread-slice"></i> Panadería</button>
+                        <button type="button" class="btn-demo-preset" data-niche="Clínica Dental y Agendamiento de Citas Odontológicas"><i class="fa-solid fa-tooth"></i> Clínica Dental</button>
+                        <button type="button" class="btn-demo-preset" data-niche="Taller Mecánico Automotriz y Venta de Repuestos"><i class="fa-solid fa-wrench"></i> Taller / Repuestos</button>
+                        <button type="button" class="btn-demo-preset" data-niche="Restaurante y Delivery de Comida con Menú Digital"><i class="fa-solid fa-utensils"></i> Restaurante</button>
+                        <button type="button" class="btn-demo-preset" data-niche="Tienda de Ropa, Calzado y Moda Urbana"><i class="fa-solid fa-shirt"></i> Tienda de Ropa</button>
+                        <button type="button" class="btn-demo-preset" data-niche="Inmobiliaria, Venta y Alquiler de Propiedades"><i class="fa-solid fa-building"></i> Inmobiliaria</button>
+                        <button type="button" class="btn-demo-preset" data-niche="Gimnasio, Fitness y Planes de Membresía"><i class="fa-solid fa-dumbbell"></i> Gimnasio</button>
+                    </div>
+                </div>
+
+                <form id="form-demo-sofia" style="margin-top: 15px;">
+                    <div class="form-group">
+                        <label for="demo-custom-niche" style="font-weight: 600;"><i class="fa-solid fa-pen-nib"></i> O escribe el negocio específico con sus detalles:</label>
+                        <input type="text" id="demo-custom-niche" placeholder="Ej: Farmacia San José con delivery 24/7 en Caracas" required style="width: 100%;">
+                    </div>
+                    <div style="display: flex; gap: 12px; margin-top: 20px;">
+                        <button type="submit" class="btn btn-primary btn-block" id="btn-activate-demo">
+                            <i class="fa-solid fa-play"></i> Activar Demostración en WhatsApp
+                        </button>
+                        <button type="button" class="btn btn-danger btn-block hidden" id="btn-stop-demo">
+                            <i class="fa-solid fa-stop"></i> Finalizar Demostración (Volver a Dalia)
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js?v=4.5"></script>
+</body>
+</html>
